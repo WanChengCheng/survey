@@ -1,0 +1,6 @@
+name: base
+channels:
+  - defaults
+dependencies:
+  - pandas=1.2.5
+  - streamlit==0.81.1
