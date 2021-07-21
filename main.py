@@ -11,7 +11,7 @@ import base64
 
 st.set_page_config(layout='wide')
 
-datafile = None
+datafile = st.text_input('请输入数据URL')
 
 
 def render(datafile):
@@ -146,6 +146,5 @@ def render(datafile):
     st.markdown("### 示例：")
 
 
-if datafile is None:
-    datafile = st.text_input('请输入数据URL')
+if datafile:
     render(datafile)
