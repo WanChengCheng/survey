@@ -55,6 +55,7 @@ def render():
 
     sidebar.markdown(
         """> _合并单选、多选为多选，部分问题根据前置选项设计了(单选、多选)两个镜像问题，勾选合并后统一视为为多选，否则按两个问题处理_""")
+
     merge_questions = sidebar.checkbox("合并同类问题", True)
 
     sidebar.markdown("""> _多选分裂为多个实体，勾选后可以计算每个选项出现的次数，否则按组合处理_""")
@@ -103,8 +104,9 @@ def render():
 
     def print_statistics(data, title):
         # print('show statistics of', title)
-        series = pd.Series([item for sublist in data[title]
-                            for item in sublist]) if title in multiopts_questions else data
+        # series = pd.Series([item for sublist in data[title]
+        # for item in sublist]) if title in multiopts_questions else data
+        series = data
         c = series.value_counts()
         p = series.value_counts(normalize=True, ascending=False) * 100
         dataframe = pd.concat([c, p], axis=1, keys=[title, '%'])
@@ -137,6 +139,8 @@ def render():
         st.subheader(ratioq)
         # filter data
         data = df.loc[:, [ratioq, *groups]]
+        if ratioq in multiopts_questions:
+            data = data.explode(column=ratioq)
         print_statistics(data, ratioq)
 
     st.title("其他问题")
