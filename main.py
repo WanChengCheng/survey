@@ -11,11 +11,9 @@ import base64
 
 st.set_page_config(layout='wide')
 
-datafile = st.text_input('请输入数据URL')
 
-
-def render(datafile):
-    df = pd.read_csv(datafile)
+def render():
+    df = pd.read_csv('./sample.csv')
 
     sidebar = st.sidebar
 
@@ -146,5 +144,4 @@ def render(datafile):
     st.markdown("### 示例：")
 
 
-if datafile:
-    render(datafile)
+render()
