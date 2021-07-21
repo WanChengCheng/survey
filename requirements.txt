@@ -1,0 +1,6 @@
+
+json
+base64
+# 
+pandas == 1.2.5
+streamlit == 0.81.1
